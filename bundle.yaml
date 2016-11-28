@@ -8,9 +8,6 @@ machines:
   '2':
     constraints: arch=ppc64el
     series: xenial
-  '3':
-    constraints: arch=ppc64el
-    series: xenial
 relations:
 - - nova-compute:amqp
   - rabbitmq-server:amqp
@@ -91,26 +88,24 @@ services:
       gui-x: '750'
       gui-y: '500'
     charm: cs:xenial/ceph-mon-6
-    num_units: 3
+    num_units: 2
     options:
-      expected-osd-count: 3
+      expected-osd-count: 2
     to:
     - lxc:1
     - lxc:2
-    - lxc:3
   ceph-osd:
     annotations:
       gui-x: '1000'
       gui-y: '500'
     charm: cs:xenial/ceph-osd-238
-    num_units: 3
+    num_units: 2
     options:
       osd-devices: /dev/sdb
       osd-reformat: 'yes'
     to:
     - '1'
     - '2'
-    - '3'
   ceph-radosgw:
     annotations:
       gui-x: '1000'
@@ -159,7 +154,7 @@ services:
       openstack-origin: cloud:xenial-newton
       admin-password: openstack
     to:
-    - lxc:3
+    - lxc:0
   mysql:
     annotations:
       gui-x: '0'
@@ -216,7 +211,7 @@ services:
       gui-x: '250'
       gui-y: '250'
     charm: cs:xenial/nova-compute-259
-    num_units: 3
+    num_units: 2
     options:
       openstack-origin: cloud:xenial-newton
       enable-live-migration: true
@@ -225,7 +220,6 @@ services:
     to:
     - '1'
     - '2'
-    - '3'
   ntp:
     annotations:
       gui-x: '1000'
@@ -241,7 +235,7 @@ services:
     options:
       openstack-origin: cloud:xenial-newton
     to:
-    - lxc:3
+    - lxc:0
   rabbitmq-server:
     annotations:
       gui-x: '500'
