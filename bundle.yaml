@@ -1,11 +1,15 @@
 machines:
   '0':
+    constraints: arch=ppc64el
     series: xenial
   '1':
+    constraints: arch=ppc64el
     series: xenial
   '2':
+    constraints: arch=ppc64el
     series: xenial
   '3':
+    constraints: arch=ppc64el
     series: xenial
 relations:
 - - nova-compute:amqp
